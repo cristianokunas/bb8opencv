@@ -69,6 +69,8 @@ public class ColorBlobDetectionActivity extends AppCompatActivity implements Cam
     private float rows;
     private float font_size;
     private double diameter = 0;
+    private double distance;
+    private double focalC = 546;
 
     //   HSV   Green
     private int iLowH = 29;
@@ -81,13 +83,14 @@ public class ColorBlobDetectionActivity extends AppCompatActivity implements Cam
     private int maxHeight;
     private int maxWidth;
     private int border = 15;
+    private int positionX;
 
-////   HSV   Green test
-//    private final int iLowH  = 45;
-//    private final int iHighH  = 75;
-//    private final int iLowS  = 20;
+////   HSV   Red test
+//    private final int iLowH  = 160;
+//    private final int iHighH  = 179;
+//    private final int iLowS  = 150;
 //    private final int iHighS  = 255;
-//    private final int iLowV  = 10;
+//    private final int iLowV  = 60;
 //    private final int iHighV  = 255;
 
     private CameraBridgeViewBase cameraBridgeViewBase;
@@ -240,11 +243,27 @@ public class ColorBlobDetectionActivity extends AppCompatActivity implements Cam
             Imgproc.line(mRgba, center_frame, center, this.Color_Blue, 7);
             // diameter circle
             this.diameter = (r * 2);
+            // distance to ball
+            this.distance = 25 * this.focalC / diameter;
+            // Position X to center_frame
+            this.positionX = (int) ((center_horz - cols) + a);
+
+            Log.i(TAG, "Radius: " + r + "- Diameter: " + diameter);
+            Log.i(TAG, "Distance ball: " + this.distance);
+            Log.i(TAG, "Position X: " + positionX);
         }
         // Diameter Display text
         Imgproc.putText(this.mRgba, "Diameter circle: (" + this.diameter + ")",
                 new Point(0.0221d * ((double) this.cols), 0.0650d * ((double) this.rows)),
-                4, (double) (1.0f * this.font_size), this.Color_PalePink, 1);
+                4, (double) (1.0f * this.font_size), this.Color_Red, 1);
+        // Distance Display text
+        Imgproc.putText(this.mRgba, "Distance to circle: (" + (int) this.distance + ")",
+                new Point(0.0221d * ((double) this.cols), 0.1090d * ((double) this.rows)),
+                4, (double) (1.0f * this.font_size), this.Color_Blue, 1);
+        // Position X Display text
+        Imgproc.putText(this.mRgba, "Ball Position X: (" + this.positionX + ")",
+                new Point(0.0221d * ((double) this.cols), 0.1510d * ((double) this.rows)),
+                4, (double) (1.0f * this.font_size), this.Color_Orange, 1);
         //! [draw]
 
         // lines central
@@ -287,7 +306,7 @@ public class ColorBlobDetectionActivity extends AppCompatActivity implements Cam
     protected void onResume() {
         super.onResume();
         if (!OpenCVLoader.initDebug()) {
-            Toast.makeText(getApplicationContext(), "Ha um problema no OpenCV", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Há um problema no OpenCV", Toast.LENGTH_SHORT).show();
         } else {
             baseLoaderCallback.onManagerConnected(BaseLoaderCallback.SUCCESS);
         }
