@@ -1,6 +1,7 @@
 *.iml
 .gradle
 /local.properties
+/OpenCV-android-sdk
 /.idea/caches
 /.idea/libraries
 /.idea/modules.xml
