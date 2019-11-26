@@ -70,7 +70,11 @@ public class ColorBlobDetectionActivity extends AppCompatActivity implements Cam
     private float font_size;
     private double diameter = 0;
     private double distance;
-    private double focalC = 546;
+
+    //moto g7 plus 960x540
+//    private double focalC = 546;
+    //moto g5 768x432
+    private double focalC = 451;
 
     //   HSV   Green
     private int iLowH = 29;
@@ -86,12 +90,12 @@ public class ColorBlobDetectionActivity extends AppCompatActivity implements Cam
     private int positionX;
 
 ////   HSV   Red test
-//    private final int iLowH  = 160;
-//    private final int iHighH  = 179;
-//    private final int iLowS  = 150;
-//    private final int iHighS  = 255;
-//    private final int iLowV  = 60;
-//    private final int iHighV  = 255;
+//    private final int iLowH  = 79;
+//    private final int iHighH  = 255;
+//    private final int iLowS  = 0;
+//    private final int iHighS  = 61;
+//    private final int iLowV  = 0;
+//    private final int iHighV  = 61;
 
     private CameraBridgeViewBase cameraBridgeViewBase;
     private BaseLoaderCallback baseLoaderCallback;
@@ -112,10 +116,11 @@ public class ColorBlobDetectionActivity extends AppCompatActivity implements Cam
         cameraBridgeViewBase.setCvCameraViewListener(this);
 
 //        cameraBridgeViewBase.setMaxFrameSize(1280,720);
-        cameraBridgeViewBase.setMaxFrameSize(960, 540);
+//        cameraBridgeViewBase.setMaxFrameSize(960, 540);
 //        cameraBridgeViewBase.setMaxFrameSize(720,480);
 //        cameraBridgeViewBase.setMaxFrameSize(352,288);
 //        cameraBridgeViewBase.setMaxFrameSize(320,180);
+        cameraBridgeViewBase.setMaxFrameSize(768,432);
         maxHeight = cameraBridgeViewBase.getHeight();
         maxWidth = cameraBridgeViewBase.getWidth();
 
